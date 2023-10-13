@@ -15,28 +15,26 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Set up Rust
+      - name: Install Rust
         uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
 
-      - name: Set up Go
-        uses: actions/setup-go@v4
-        with:
-          go-version: "stable"
-
       - name: Build lib
-        uses: actions-rs/cargo@v1
-        with:
-          cwd: ./lib/rs-qr
-          command: build
-          args: --release
+        working-directory: lib/rs-qr
+        run: |
+          cargo build --release
 
       - name: Copy lib
         run: |
           cp lib/rs-qr/target/rs-qr.h ./lib
           cp lib/rs-qr/target/release/librs_qr.a ./lib
           cp lib/rs-qr/target/release/librs_qr.so ./lib
+
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: "stable"
 
       - name: Build Go
         run: go build -v ./...
