@@ -1,0 +1,21 @@
+[package]
+name = "rs-qr"
+version = "0.1.0"
+edition = "2021"
+build = "build.rs"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[lib]
+# `cdylib` for dynamic library.
+# `staticlib` for static library.
+# See more information at https://doc.rust-lang.org/reference/linkage.html
+crate-type = ["cdylib", "staticlib"]
+
+[dependencies]
+base64 = "0.21.4"
+fast_qr = { version = "0.10.3", features = ["image"] }
+libc = "0.2.149"
+
+[build-dependencies]
+cbindgen = "0.26.0"
