@@ -28,7 +28,7 @@ jobs:
       - name: Build lib
         uses: actions-rs/cargo@v1
         with:
-          working-directory: lib/rs-qr
+          cwd: ./lib/rs-qr
           command: build
           args: --release
 
